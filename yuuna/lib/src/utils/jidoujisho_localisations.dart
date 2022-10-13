@@ -310,6 +310,7 @@ class JidoujishoLocalisations {
     'lyrics_artist': 'Artist',
     'set_media': 'Set Media',
     'no_recordings_found': 'No recordings found',
-    'wrap_image_audio': 'Wrap Image/Audio with Tags'
+    'wrap_image_audio': 'Wrap Image/Audio with Tags',
+    'external_stream_launch_bg_service': 'Start'
   };
 }

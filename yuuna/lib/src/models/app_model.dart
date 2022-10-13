@@ -33,6 +33,7 @@ import 'package:yuuna/language.dart';
 import 'package:yuuna/media.dart';
 import 'package:yuuna/models.dart';
 import 'package:yuuna/pages.dart';
+import 'package:yuuna/src/media/sources/player_external_stream_source.dart';
 import 'package:yuuna/utils.dart';
 
 /// Schemas used in Isar database.
@@ -412,7 +413,8 @@ class AppModel with ChangeNotifier {
       PlayerMediaType.instance: [
         PlayerLocalMediaSource.instance,
         PlayerYoutubeSource.instance,
-        PlayerNetworkStreamSource.instance
+        PlayerNetworkStreamSource.instance,
+        PlayerExternalStreamSource.instance
       ],
       ReaderMediaType.instance: [
         ReaderTtuSource.instance,
