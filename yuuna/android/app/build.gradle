@@ -76,7 +76,19 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    // excluding androidx.lifecycle since this package installs a transitional dependency
+    // for kotlin (-ktx ending) which clashes with a newer java version
+    implementation('androidx.preference:preference-ktx:1.2.0') {
+        exclude group: 'androidx.lifecycle'
+    }
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.github.ankidroid:Anki-Android:api-v1.1.0'
+    // TODO: we might be able to remove these 2 later
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
 }
 
 // This must appear at the bottom of the file

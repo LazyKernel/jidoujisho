@@ -28,11 +28,12 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import app.lrorpilla.yuuna.R
 import app.lrorpilla.yuuna.overlay.DummyActivity
 import app.lrorpilla.yuuna.overlay.source.CrunchyrollParser
 import app.lrorpilla.yuuna.overlay.source.IDataParser
 import app.lrorpilla.yuuna.overlay.source.NetflixParser
-import app.lrorpilla.yuuna.overlay.WakanimParser
+import app.lrorpilla.yuuna.overlay.source.WakanimParser
 import app.lrorpilla.yuuna.overlay.subtitle.SubtitleManager
 import app.lrorpilla.yuuna.overlay.subtitle.SubtitleTimingTask
 import app.lrorpilla.yuuna.overlay.utils.Utils
@@ -116,7 +117,7 @@ class OverlayAccessibilityService : AccessibilityService() {
                     }
                     mSubtitleTimingTask = SubtitleTimingTask(mDataParser, mSubtitleManager, mMainThreadHandler)
                     mTimer.scheduleAtFixedRate(mSubtitleTimingTask, 0, 250)
-                    val preferences = PreferenceManager.getDefaultSharedPreferences(this@MainAccessibilityService)
+                    val preferences = PreferenceManager.getDefaultSharedPreferences(this@OverlayAccessibilityService)
                     mSubtitleTimingTask.mOffsetInMilliseconds = preferences.getInt("subtitleOffset", 0)
                     mServiceRunning = true
                     buildPersistentNotification()
@@ -180,13 +181,13 @@ class OverlayAccessibilityService : AccessibilityService() {
 
     private fun buildPersistentNotification() {
         val stopIntent = Intent(this, NotifBroadcastReceiver::class.java).apply {
-            action = "com.lazykernel.subsoverlay.STOP_BG_SERVICE"
+            action = "app.lrorpilla.yuuna.overlay.STOP_BG_SERVICE"
         }
         val stopPendingIntent = PendingIntent.getBroadcast(this, 0, stopIntent, PendingIntent.FLAG_IMMUTABLE)
         val builder = NotificationCompat.Builder(this, mDefaultNotifChannelId).apply {
             setSmallIcon(R.drawable.ic_launcher_foreground)
-            setContentTitle("SubsOverlay")
-            setContentText("SubsOverlay background service is currently running.")
+            setContentTitle("Jidoujisho")
+            setContentText("Jidoujisho background service is currently running.")
             priority = NotificationCompat.PRIORITY_LOW
             setOngoing(true)
             addAction(R.drawable.ic_launcher_foreground, "STOP", stopPendingIntent)
@@ -278,7 +279,7 @@ class OverlayAccessibilityService : AccessibilityService() {
             if (event.action == ACTION_UP) {
                 mSubtitleTimingTask.mOffsetInMilliseconds -= 100
                 subOffsetTextView.text = mSubtitleTimingTask.mOffsetInMilliseconds.toString()
-                val preferences = PreferenceManager.getDefaultSharedPreferences(this@MainAccessibilityService)
+                val preferences = PreferenceManager.getDefaultSharedPreferences(this@OverlayAccessibilityService)
                 preferences.edit().putInt("subtitleOffset", mSubtitleTimingTask.mOffsetInMilliseconds).apply()
             }
             true
@@ -288,7 +289,7 @@ class OverlayAccessibilityService : AccessibilityService() {
             if (event.action == ACTION_UP) {
                 mSubtitleTimingTask.mOffsetInMilliseconds += 100
                 subOffsetTextView.text = mSubtitleTimingTask.mOffsetInMilliseconds.toString()
-                val preferences = PreferenceManager.getDefaultSharedPreferences(this@MainAccessibilityService)
+                val preferences = PreferenceManager.getDefaultSharedPreferences(this@OverlayAccessibilityService)
                 preferences.edit().putInt("subtitleOffset", mSubtitleTimingTask.mOffsetInMilliseconds).apply()
             }
             true
@@ -329,7 +330,7 @@ class OverlayAccessibilityService : AccessibilityService() {
 
         val intent = Intent()
         intent.apply {
-            setClass(this@MainAccessibilityService, DummyActivity::class.java)
+            setClass(this@OverlayAccessibilityService, DummyActivity::class.java)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtras(bundle)
         }

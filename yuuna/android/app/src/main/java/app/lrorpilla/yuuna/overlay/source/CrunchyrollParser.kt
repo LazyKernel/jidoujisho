@@ -78,7 +78,7 @@ class CrunchyrollParser : IDataParser() {
 
         if (event?.eventType == TYPE_WINDOW_CONTENT_CHANGED && event.source?.viewIdResourceName == "com.crunchyroll.crunchyroid:id/current_time") {
             val source = event.source
-            val match = timeRegex.matchEntire(source.text)
+            val match = timeRegex.matchEntire(source!!.text)
             if (match != null) {
                 val values = match.groups.filterNotNull()
                 val newSeconds = values.slice(IntRange(1, values.size - 1)).map { it.value.toInt() }

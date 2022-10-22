@@ -20,6 +20,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.clearSpans
+import app.lrorpilla.yuuna.R
 import app.lrorpilla.yuuna.overlay.utils.Utils
 
 class SubtitleManager(private val applicationContext: Context, private val windowManager: WindowManager) {
@@ -36,20 +37,20 @@ class SubtitleManager(private val applicationContext: Context, private val windo
             }
         }
     var oldTimeInSeconds: Double = 0.0
-    private val subtitlesShown = mutableListOf<ISubtitleParser.Subtitle>()
+    //private val subtitlesShown = mutableListOf<ISubtitleParser.Subtitle>()
     lateinit var mSubtitleLayout: LinearLayout
-    var mTokenizer: Tokenizer? = null
+    //var mTokenizer: Tokenizer? = null
     lateinit var mSubtitleTextView: TextView
     lateinit var mSubtitleLayoutParams: LayoutParams
     lateinit var mSpanRange: IntRange
-    private val mSubParser = SrtParser(applicationContext)
+    //private val mSubParser = SrtParser(applicationContext)
     var mSubtitleAdjustLayout: ConstraintLayout? = null
-    private val mDictionaryModal = DictionaryModal(applicationContext, windowManager) {
-        clearSubtitleView()
-    }
+    //private val mDictionaryModal = DictionaryModal(applicationContext, windowManager) {
+    //    clearSubtitleView()
+    //}
 
     fun buildSubtitleView()  {
-        mSubtitleLayout = LinearLayout(applicationContext)
+        /*mSubtitleLayout = LinearLayout(applicationContext)
         mSubtitleTextView = TextView(applicationContext)
         mSubtitleTextView.apply {
             id = R.id.subsTextView
@@ -87,10 +88,11 @@ class SubtitleManager(private val applicationContext: Context, private val windo
                 }
             }
             true
-        }
+        }*/
     }
 
     fun getWordFromTouchEvent(view: View, event: MotionEvent): Pair<String?, IntRange?> {
+        /*
         // Span guaranteed to be in range, if not null
         val layout = (view as TextView).layout
         if (layout != null) {
@@ -124,11 +126,13 @@ class SubtitleManager(private val applicationContext: Context, private val windo
                 }
             }
         }
-
+        */
         return Pair(null, null)
     }
 
+
     fun openSubtitleAdjustWindow() {
+        /*
         mSubtitleAdjustLayout = View.inflate(applicationContext, R.layout.subtitle_adjust, null) as ConstraintLayout
         mSubtitleAdjustLayout?.apply {
             setBackgroundColor(Color.WHITE)
@@ -212,10 +216,12 @@ class SubtitleManager(private val applicationContext: Context, private val windo
         catch (ex: Exception) {
             Log.e("SUBSOVERLAY", "adding subs adjust view failed", ex)
         }
+        */
     }
 
+
     fun runSubtitleUpdate() {
-        val events = mSubParser.pollNewEventsForRange(oldTimeInSeconds..currentTimeInSeconds)
+        /*val events = mSubParser.pollNewEventsForRange(oldTimeInSeconds..currentTimeInSeconds)
         events.forEach { event ->
             Log.i("SUBSOVERLAY", "event: ${event.type}, ${event.subtitle.text}")
             if (event.type == ISubtitleParser.SubtitleEventType.SUBTITLE_SHOW) {
@@ -237,7 +243,7 @@ class SubtitleManager(private val applicationContext: Context, private val windo
         }
 
         // Join to string requires higher android version
-        updateSubtitleLine(subtitlesShown.fold("") { acc, subtitle -> acc + subtitle.text })
+        updateSubtitleLine(subtitlesShown.fold("") { acc, subtitle -> acc + subtitle.text })*/
     }
 
     private fun updateSubtitleLine(newLine: String) {
@@ -257,7 +263,7 @@ class SubtitleManager(private val applicationContext: Context, private val windo
 
         val coords = IntArray(2)
         mSubtitleTextView.getLocationOnScreen(coords)
-        mDictionaryModal.buildDictionaryModal(word, coords[1])
+        //mDictionaryModal.buildDictionaryModal(word, coords[1])
     }
 
     private fun clearSubtitleView() {
@@ -273,7 +279,7 @@ class SubtitleManager(private val applicationContext: Context, private val windo
 
     fun openDefaultViews() {
         // Handling creation here, since it takes a few seconds
-        mTokenizer = Tokenizer()
+        //mTokenizer = Tokenizer()
 
         try {
             if (!mSubtitleLayout.isAttachedToWindow) {
@@ -295,10 +301,10 @@ class SubtitleManager(private val applicationContext: Context, private val windo
             mSubtitleAdjustLayout = null
         }
         // GC should delete
-        mTokenizer = null
+        //mTokenizer = null
     }
 
     fun loadSubtitlesFromUri(fileUri: Uri) {
-        mSubParser.parseSubtitlesFromUri(fileUri)
+        //mSubParser.parseSubtitlesFromUri(fileUri)
     }
 }

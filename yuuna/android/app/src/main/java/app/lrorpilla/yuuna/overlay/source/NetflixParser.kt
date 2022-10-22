@@ -51,32 +51,35 @@ class NetflixParser : IDataParser() {
         // timing label
         if (event?.source?.viewIdResourceName == "com.netflix.mediaclient:id/2131428621") {
             println("timing label")
-            println(event.source.availableExtraData)
-            println(event.source.className)
-            println(event.source.contentDescription) // null
-            println(event.source.hintText) //null
+            val src = event.source
+            println(src?.availableExtraData)
+            println(src?.className)
+            println(src?.contentDescription) // null
+            println(src?.hintText) //null
         }
 
         // timeline seek bar 2131427586
         if (event?.source?.viewIdResourceName == "com.netflix.mediaclient:id/2131429764" ||
             event?.source?.viewIdResourceName == "com.netflix.mediaclient:id/2131427586") {
             println("timeline seek bar")
-            println(event.source.viewIdResourceName)
-            println(event.source.availableExtraData)
-            println(event.source.rangeInfo)
-            println(event.source.className)
-            println(event.source.contentDescription)
-            println(event.source.hintText)
+            val src = event.source
+            println(src?.viewIdResourceName)
+            println(src?.availableExtraData)
+            println(src?.rangeInfo)
+            println(src?.className)
+            println(src?.contentDescription)
+            println(src?.hintText)
         }
 
         // episode name
         if (event?.source?.viewIdResourceName == "com.netflix.mediaclient:id/2131429193") {
             println("episode name")
-            println(event.source.availableExtraData)
-            println(event.source.className)
-            println(event.source.contentDescription) // only for episode name (much more machine readable)
+            val src = event.source
+            println(src?.availableExtraData)
+            println(src?.className)
+            println(src?.contentDescription) // only for episode name (much more machine readable)
             // format: "Season <number>, episode <number>, <episode name>"
-            println(event.source.hintText)
+            println(src?.hintText)
         }
 
         // Detecting moving back to (any?) netflix page from media player

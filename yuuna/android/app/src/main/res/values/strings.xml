@@ -1,0 +1,23 @@
+<!-- Adding these temporarily for ease of integration initially -->
+<resources>
+    <string name="app_name">Jidoujisho Overlay</string>
+    <string name="select_sub_file">Select subtitle file</string>
+    <string name="label_sub_offset">Subtitle offset (ms)</string>
+    <string name="label_no_sub_file_selected">No file selected</string>
+    <string name="label_close">Close</string>
+    <string name="label_subtitle_adjust">Adjust</string>
+    <string name="go_to_accessibility">Go to accessibility</string>
+    <string name="accessibility_explanation">This app requires turning on accessibility permissions. The permissions are used for displaying overlays and getting timing information from media players.</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="service_start_stop_label">Start and stop the overlay service</string>
+    <string name="add_dictionary">Add a new dictionary</string>
+    <string name="dictionary_list">Dictionaries</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="delete_dict_confirmation">Are you certain you want to delete %1$s?</string>
+    <string name="no_results">No results</string>
+    <string name="loading_dict">Loading dictionary…</string>
+    <string name="deleting_dict">Deleting dictionary…</string>
+    <string name="default_notification_channel_name">JDJ_OVERLAY_DEFAULT_NOTIF_CHANNEL</string>
+    <string name="default_notification_channel_desc">Default persistent notification channel for Jidoujisho Overlay</string>
+</resources>
